@@ -35,11 +35,11 @@ class YahooUser implements ResourceOwnerInterface
      */
     public function getName()
     {
-       /*
-       nickname is not coming in the response.
-       $this->response['profile']['nickname']
-       */ 
-       return $this->getFirstName()." ".$this->getLastName();
+        /*
+        nickname is not coming in the response.
+        $this->response['profile']['nickname']
+        */
+        return $this->getFirstName()." ".$this->getLastName();
     }
 
     /**
