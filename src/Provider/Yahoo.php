@@ -15,13 +15,12 @@ class Yahoo extends AbstractProvider
 
 
     /*
-	https://developer.yahoo.com/oauth2/guide/flows_authcode/#step-2-get-an-authorization-url-and-authorize-access
+    https://developer.yahoo.com/oauth2/guide/flows_authcode/#step-2-get-an-authorization-url-and-authorize-access
     */
     protected $language = "en-us";
 
-	
-	private $imageSize='192x192';
-	
+    private $imageSize='192x192';
+
 
     public function getBaseAuthorizationUrl()
     {
@@ -36,7 +35,7 @@ class Yahoo extends AbstractProvider
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
     
-    	$guid = $token->getResourceOwnerId();
+        $guid = $token->getResourceOwnerId();
     
         return 'https://social.yahooapis.com/v1/user/'.$guid.'/profile?format=json';
     }
@@ -52,7 +51,7 @@ class Yahoo extends AbstractProvider
     protected function getUserImage(array $response, AccessToken $token)
     {
         $guid = $token->getResourceOwnerId();
-
+        
         $url = 'https://social.yahooapis.com/v1/user/'.$guid.'/profile/image/'.$this->imageSize.'?format=json';
         
         $request = $this->getAuthenticatedRequest('get', $url, $token);
@@ -76,9 +75,9 @@ class Yahoo extends AbstractProvider
 
     protected function getDefaultScopes()
     {
-    	/*
-    	   No scope is required. scopes are part of APP Settings.
-    	*/
+    /*
+       No scope is required. scopes are part of APP Settings.
+    */
         return [];
     }
 
@@ -93,15 +92,14 @@ class Yahoo extends AbstractProvider
         if (!empty($data['error'])) {
             $code  = 0;
             $error = $data['error'];
-
+            
             if (is_array($error)) {
-            	/*
-            	   No code is returned in the error
-            	*/
-                $code  = -1; 
+            /*
+               No code is returned in the error
+            */
+                $code  = -1;
                 $error = $error['description'];
             }
-
             throw new IdentityProviderException($error, $code, $data);
         }
     }
@@ -109,7 +107,7 @@ class Yahoo extends AbstractProvider
     protected function createResourceOwner(array $response, AccessToken $token)
     {
         $user = new YahooUser($response);
-
+        
         $imageUrl = $this->getUserImageUrl($response, $token);
         
         return $user->setImageURL($imageUrl);

@@ -36,10 +36,10 @@ class YahooUser implements ResourceOwnerInterface
     public function getName()
     {
        /*
-       	nickname is not coming in the response.
-       	$this->response['profile']['nickname']
+       nickname is not coming in the response.
+       $this->response['profile']['nickname']
        */ 
-       return $this->getFirstName()." ".$this->getLastName();        
+       return $this->getFirstName()." ".$this->getLastName();
     }
 
     /**
@@ -59,7 +59,7 @@ class YahooUser implements ResourceOwnerInterface
      */
     public function getLastName()
     {
-        return $this->response['profile']['familyName'];        
+        return $this->response['profile']['familyName'];
     }
 
     /**
@@ -84,14 +84,11 @@ class YahooUser implements ResourceOwnerInterface
         return $this->response['imageUrl'];
     }
 
-	
-	public function setImageURL($url)
-	{
-		$this->response['imageUrl'] = $url;
-		return $this;
-	}
-
-
+    public function setImageURL($url)
+    {
+        $this->response['imageUrl'] = $url;
+        return $this;
+    }
 
     /**
      * Get user data as an array.
