@@ -1,5 +1,5 @@
 # Yahoo Provider for OAuth 2.0 Client
-
+[![Build Status](https://travis-ci.org/hayageek/oauth2-yahoo.svg)](https://travis-ci.org/hayageek/oauth2-yahoo)
 
 This package provides Yahoo OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
@@ -21,7 +21,7 @@ The following versions of PHP are supported.
 To install, use composer:
 
 ```
-composer require league/oauth2-yahoo
+composer require hayageek/oauth2-yahoo
 ```
 
 ## Usage
