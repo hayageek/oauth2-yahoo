@@ -97,6 +97,7 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('mock_family_name', $user->getLastName());
         $this->assertEquals('mock_email', $user->getEmail());
         $this->assertEquals('mock_image_url', $user->getAvatar());
+        $this->assertEquals('mock_given_name mock_family_name', $user->getName());
         
 
         $user = $user->toArray();
