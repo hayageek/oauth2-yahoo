@@ -79,12 +79,14 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $response = json_decode('{"profile":{"guid":"mocguid","emails":[{"handle":"mock_email","id":2,"primary":false,"type":"HOME"}],"familyName":"mock_family_name","givenName":"mock_given_name","uri":"mock_url"}}', true);
 		$imageData = json_decode('{"image": {"uri": "mock_uril","height": 192,"imageUrl": "mock_image_url", "size": "192x192", "width": 192 } }',true);
 
-        $provider = m::mock('League\OAuth2\Client\Provider\Yahoo[fetchResourceOwnerDetails,getUserImage]')->shouldAllowMockingProtectedMethods();;
+        $provider = m::mock('League\OAuth2\Client\Provider\Yahoo[fetchResourceOwnerDetails,getResponse]')->shouldAllowMockingProtectedMethods();;
         $provider->shouldReceive('fetchResourceOwnerDetails')->once()->andReturn($response);
-        $provider->shouldReceive('getUserImage')->once()->andReturn($imageData);
+        $provider->shouldReceive('getResponse')->once()->andReturn($imageData);
         
         
         $token = m::mock('League\OAuth2\Client\Token\AccessToken');
+		$token->shouldReceive('getResourceOwnerId')->once()->andReturn('mocguid');
+        
         $user = $provider->getResourceOwner($token);
         
 
