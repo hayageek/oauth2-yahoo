@@ -1,5 +1,7 @@
 # Yahoo Provider for OAuth 2.0 Client
-[![Build Status](https://travis-ci.org/hayageek/oauth2-yahoo.svg)](https://travis-ci.org/hayageek/oauth2-yahoo) [![Coverage Status](https://coveralls.io/repos/hayageek/oauth2-yahoo/badge.svg?branch=master&service=github)](https://coveralls.io/github/hayageek/oauth2-yahoo?branch=master) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hayageek/oauth2-yahoo/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hayageek/oauth2-yahoo/?branch=master)
+[![Build Status](https://travis-ci.org/hayageek/oauth2-yahoo.svg)](https://travis-ci.org/hayageek/oauth2-yahoo) 
+[![Coverage Status](https://coveralls.io/repos/hayageek/oauth2-yahoo/badge.svg?branch=master&service=github)](https://coveralls.io/github/hayageek/oauth2-yahoo?branch=master) 
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/hayageek/oauth2-yahoo/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/hayageek/oauth2-yahoo/?branch=master)
 
 This package provides Yahoo OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
@@ -29,6 +31,9 @@ composer require hayageek/oauth2-yahoo
 ### Authorization Code Flow
 
 ```php
+session_start();
+require('vendor/autoload.php');
+
 $provider = new League\OAuth2\Client\Provider\Yahoo([
     'clientId'     => '{Yahoo-app-id}',
     'clientSecret' => '{Yahoo-app-secret}',
@@ -113,6 +118,17 @@ $provider = new League\OAuth2\Client\Provider\Yahoo([
 
 $grant = new League\OAuth2\Client\Grant\RefreshToken();
 $token = $provider->getAccessToken($grant, ['refresh_token' => $refreshToken]);
+
+// Use this to interact with an API on the users behalf
+echo "Token: ". $token->getToken()."<br>";
+
+// Use this to get a new access token if the old one expires
+echo  "Refresh Token: ".$token->getRefreshToken()."<br>";
+
+// Number of seconds until the access token will expire, and need refreshing
+echo "Expires:" .$token->getExpires()."<br>";
+
+
 ```
 
 ## Testing
@@ -127,10 +143,10 @@ $ ./vendor/bin/phpunit
 
 ## Credits
 
-- 
-- 
+- [Ravishanker Kusuma](https://github.com/hayageek/) 
+
 
 
 ## License
 
-The MIT License (MIT). Please see [License File](https://github.com/thephpleague/oauth2-Yahoo/blob/master/LICENSE) for more information.
+The MIT License (MIT). Please see [License File](https://github.com/hayageek/oauth2-yahoo/blob/master/LICENSE) for more information.
