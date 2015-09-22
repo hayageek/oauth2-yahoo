@@ -1,7 +1,9 @@
 <?php
 namespace League\OAuth2\Client\Test\Provider;
-require(__DIR__ .'/../../../src/Provider/Yahoo.php');
-require(__DIR__ .'/../../../src/Provider/YahooUser.php');
+require(__DIR__ .'/../../../vendor/autoload.php');
+
+//require(__DIR__ .'/../../../src/Provider/Yahoo.php');
+//require(__DIR__ .'/../../../src/Provider/YahooUser.php');
 
 
 use League\OAuth2\Client\Provider\Yahoo as YahooProvider;
@@ -51,15 +53,15 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $this->assertAttributeNotEmpty('state', $this->provider);
     }
 
-  /*  public function testBaseAccessTokenUrl()
+    public function testBaseAccessTokenUrl()
     {
         $url = $this->provider->getBaseAccessTokenUrl([]);
-        $uri = parse_url($url);
-        parse_str($uri['query'], $query);
         
+        $uri = parse_url($url);
+        parse_str($uri['path'], $query);
 
         $this->assertEquals('/oauth2/get_token', $uri['path']);
-    }*/
+    }
 
     public function testResourceOwnerDetailsUrl()
     {
@@ -108,7 +110,7 @@ class YahooTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException League\OAuth2\Client\Provider\Exception\IdentityProviderException
      */
-   /* public function testErrorResponse()
+    public function testErrorResponse()
     {
         $response = m::mock('GuzzleHttp\Psr7\Response');
 
@@ -117,7 +119,7 @@ class YahooTest extends \PHPUnit_Framework_TestCase
             ->andReturn(['application/json']);
 
         $response->shouldReceive('getBody')
-            ->andReturn('{"error": {"code": -1, "message": "I am an error"}}');
+            ->andReturn(' { "error" : {"uri" : "moc_uri","lang" : "en-US","description" : "mock_description"}}');
 
         $provider = m::mock('League\OAuth2\Client\Provider\Yahoo[sendRequest]')
             ->shouldAllowMockingProtectedMethods();
@@ -130,5 +132,5 @@ class YahooTest extends \PHPUnit_Framework_TestCase
 		$token->shouldReceive('getResourceOwnerId')->once()->andReturn('mocguid');
         
         $user = $provider->getResourceOwner($token);
-    }*/
+    }
 }
