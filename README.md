@@ -1,4 +1,6 @@
 # Yahoo Provider for OAuth 2.0 Client
+
+[![Join the chat at https://gitter.im/hayageek/oauth2-yahoo](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hayageek/oauth2-yahoo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Build Status](https://travis-ci.org/hayageek/oauth2-yahoo.svg)](https://travis-ci.org/hayageek/oauth2-yahoo) [![Coverage Status](https://coveralls.io/repos/hayageek/oauth2-yahoo/badge.svg?branch=master&service=github)](https://coveralls.io/github/hayageek/oauth2-yahoo?branch=master)
 
 This package provides Yahoo OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
