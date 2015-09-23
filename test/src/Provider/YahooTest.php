@@ -1,12 +1,8 @@
 <?php
-namespace League\OAuth2\Client\Test\Provider;
+namespace Hayageek\OAuth2\Client\Test\Provider;
 require(__DIR__ .'/../../../vendor/autoload.php');
 
-//require(__DIR__ .'/../../../src/Provider/Yahoo.php');
-//require(__DIR__ .'/../../../src/Provider/YahooUser.php');
-
-
-use League\OAuth2\Client\Provider\Yahoo as YahooProvider;
+use Hayageek\OAuth2\Client\Provider\Yahoo as YahooProvider;
 
 use Mockery as m;
 
@@ -79,7 +75,7 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $response = json_decode('{"profile":{"guid":"mocguid","emails":[{"handle":"mock_email","id":2,"primary":false,"type":"HOME"}],"familyName":"mock_family_name","givenName":"mock_given_name","uri":"mock_url"}}', true);
 		$imageData = json_decode('{"image": {"uri": "mock_uril","height": 192,"imageUrl": "mock_image_url", "size": "192x192", "width": 192 } }',true);
 
-        $provider = m::mock('League\OAuth2\Client\Provider\Yahoo[fetchResourceOwnerDetails,getResponse]')->shouldAllowMockingProtectedMethods();;
+        $provider = m::mock('Hayageek\OAuth2\Client\Provider\Yahoo[fetchResourceOwnerDetails,getResponse]')->shouldAllowMockingProtectedMethods();;
         $provider->shouldReceive('fetchResourceOwnerDetails')->once()->andReturn($response);
         $provider->shouldReceive('getResponse')->once()->andReturn($imageData);
         
@@ -124,7 +120,7 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $response->shouldReceive('getBody')
             ->andReturn(' { "error" : {"uri" : "moc_uri","lang" : "en-US","description" : "mock_description"}}');
 
-        $provider = m::mock('League\OAuth2\Client\Provider\Yahoo[sendRequest]')
+        $provider = m::mock('Hayageek\OAuth2\Client\Provider\Yahoo[sendRequest]')
             ->shouldAllowMockingProtectedMethods();
 
         $provider->shouldReceive('sendRequest')

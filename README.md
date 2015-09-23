@@ -34,7 +34,7 @@ composer require hayageek/oauth2-yahoo
 session_start();
 require('vendor/autoload.php');
 
-$provider = new League\OAuth2\Client\Provider\Yahoo([
+$provider = new Hayageek\OAuth2\Client\Provider\Yahoo([
     'clientId'     => '{Yahoo-app-id}',
     'clientSecret' => '{Yahoo-app-secret}',
     'redirectUri'  => 'https://example.com/callback-url',
@@ -110,7 +110,7 @@ if (!empty($_GET['error'])) {
 
 ```php
 
-$provider = new League\OAuth2\Client\Provider\Yahoo([
+$provider = new Hayageek\OAuth2\Client\Provider\Yahoo([
     'clientId'     => '{Yahoo-app-id}',
     'clientSecret' => '{Yahoo-app-secret}',
     'redirectUri'  => 'https://example.com/callback-url',

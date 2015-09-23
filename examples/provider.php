@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use League\OAuth2\Client\Provider\Yahoo;
+use Hayageek\OAuth2\Client\Provider\Yahoo;
 
 // Replace these with your token settings
 // Create a project at https://developer.yahoo.com/apps

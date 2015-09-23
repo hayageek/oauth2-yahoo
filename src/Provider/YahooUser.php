@@ -1,6 +1,6 @@
 <?php
 
-namespace League\OAuth2\Client\Provider;
+namespace Hayageek\OAuth2\Client\Provider;
 
 class YahooUser implements ResourceOwnerInterface
 {
