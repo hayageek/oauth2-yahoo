@@ -17,6 +17,8 @@
         "authentication",
         "yahoo"
     ],
+    "minimum-stability": "dev",
+    "prefer-stable" : true,
     "require": {
         "league/oauth2-client": "^1.0"
     },
