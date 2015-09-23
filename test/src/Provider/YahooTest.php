@@ -1,8 +1,6 @@
 <?php
 namespace Hayageek\OAuth2\Client\Test\Provider;
 require(__DIR__ .'/../../../vendor/autoload.php');
-require(__DIR__ .'/../../../src/Provider/Yahoo.php');
-require(__DIR__ .'/../../../src/Provider/YahooUser.php');
 
 use Hayageek\OAuth2\Client\Provider\Yahoo as YahooProvider;
 
