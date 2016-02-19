@@ -49,6 +49,8 @@ if (!empty($_GET['error'])) {
 
     // If we don't have an authorization code then get one
     $authUrl = $provider->getAuthorizationUrl();
+    // If we want to set approve page language (default is 'en-us')
+    // $authUrl = $provider->getAuthorizationUrl(['language' => 'zh-tw']);
     $_SESSION['oauth2state'] = $provider->getState();
     header('Location: ' . $authUrl);
     exit;
