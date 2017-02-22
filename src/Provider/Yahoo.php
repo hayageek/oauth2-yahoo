@@ -64,12 +64,9 @@ class Yahoo extends AbstractProvider
 
     protected function getAuthorizationParameters(array $options)
     {
-        $params = array_merge(
-            parent::getAuthorizationParameters($options),
-            array_filter([
-                'language'    => $this->language
-            ])
-        );
+        $params = parent::getAuthorizationParameters($options);
+
+        $params['language'] = isset($options['language']) ? $options['language'] : $this->language;
 
         return $params;
     }
