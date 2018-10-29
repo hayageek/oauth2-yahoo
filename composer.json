@@ -1,5 +1,5 @@
 {
-    "name": "hayageek/oauth2-yahoo",
+    "name": "timothyasp/oauth2-yahoo",
     "description": "Yahoo OAuth 2.0 Client Provider for The PHP League OAuth2-Client",
     "license": "MIT",
     "authors": [
@@ -7,6 +7,10 @@
             "name": "Ravishanker Kusuma",
             "email": "hayageek@gmail.com",
             "homepage": "http://hayageek.com"
+        },
+        {
+            "name": "Timothy Asp",
+            "email": "tim@asp.consulting"
         }
     ],
     "keywords": [
@@ -20,7 +24,7 @@
     "minimum-stability": "dev",
     "prefer-stable" : true,
     "require": {
-        "league/oauth2-client": "^1.0"
+        "league/oauth2-client": "^2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
