@@ -23,14 +23,14 @@ class Bootstrap
     {
         $vendorPath = static::findParentPath('vendor');
 
-        $loader = include $vendorPath.'/autoload.php';
+        $loader = include $vendorPath . '/autoload.php';
     }
 
     protected static function findParentPath($path)
     {
         $dir = __DIR__;
         $previousDir = '.';
-        while (!is_dir($dir.'/'.$path)) {
+        while (!is_dir($dir . '/' . $path)) {
             $dir = dirname($dir);
             if ($previousDir === $dir) {
                 return false;
@@ -38,7 +38,7 @@ class Bootstrap
             $previousDir = $dir;
         }
 
-        return $dir.'/'.$path;
+        return $dir . '/' . $path;
     }
 }
 
