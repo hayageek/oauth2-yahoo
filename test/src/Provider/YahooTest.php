@@ -120,10 +120,10 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $response->shouldReceive('getBody')
             ->andReturn(' { "error" : {"uri" : "moc_uri","lang" : "en-US","description" : "mock_description"}}');
 
-        $provider = m::mock('Hayageek\OAuth2\Client\Provider\Yahoo[sendRequest]')
+        $provider = m::mock('Hayageek\OAuth2\Client\Provider\Yahoo[getResponse]')
             ->shouldAllowMockingProtectedMethods();
 
-        $provider->shouldReceive('sendRequest')
+        $provider->shouldReceive('getResponse')
             ->times(1)
             ->andReturn($response);
 

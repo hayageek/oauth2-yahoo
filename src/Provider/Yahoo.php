@@ -20,8 +20,7 @@ class Yahoo extends AbstractProvider
     protected $language = "en-us";
 
     private $imageSize = '192x192';
-
-
+    
     public function getBaseAuthorizationUrl()
     {
         return 'https://api.login.yahoo.com/oauth2/request_auth';
