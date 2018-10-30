@@ -5,7 +5,7 @@
 
 This package provides Yahoo OAuth 2.0 support for the PHP League's [OAuth 2.0 Client](https://github.com/thephpleague/oauth2-client).
 
-This package is compliant with [PSR-1][], [PSR-2][] and [PSR-4][]. If you notice compliance oversights, please send
+This package is compliant with [PSR-1](https://www.php-fig.org/psr/psr-1/), [PSR-2](https://www.php-fig.org/psr/psr-2/) and [PSR-4](https://www.php-fig.org/psr/psr-4/). If you notice compliance oversights, please send
 a patch via pull request.
 
 
@@ -13,9 +13,9 @@ a patch via pull request.
 
 The following versions of PHP are supported.
 
-* PHP 5.5
 * PHP 5.6
 * PHP 7.0
+* PHP 7.1
 * HHVM
 
 ## Installation
@@ -146,7 +146,6 @@ $ ./vendor/bin/phpunit
 ## Credits
 
 - [Ravishanker Kusuma](https://github.com/hayageek/) 
-
 
 
 ## License

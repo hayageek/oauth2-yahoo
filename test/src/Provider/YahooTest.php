@@ -1,9 +1,10 @@
 <?php
+
 namespace Hayageek\OAuth2\Client\Test\Provider;
-require(__DIR__ .'/../../../vendor/autoload.php');
+
+require(__DIR__ . '/../../../vendor/autoload.php');
 
 use Hayageek\OAuth2\Client\Provider\Yahoo as YahooProvider;
-
 use Mockery as m;
 
 class YahooTest extends \PHPUnit_Framework_TestCase
@@ -41,18 +42,18 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('language', $query);
 
         $this->assertEquals('mock_client_id', $query['client_id']);
-		$this->assertEquals('none', $query['redirect_uri']);
-		$this->assertEquals('en-us', $query['language']);
-		$this->assertEquals('code', $query['response_type']);
-		
-        
+        $this->assertEquals('none', $query['redirect_uri']);
+        $this->assertEquals('en-us', $query['language']);
+        $this->assertEquals('code', $query['response_type']);
+
+
         $this->assertAttributeNotEmpty('state', $this->provider);
     }
 
     public function testBaseAccessTokenUrl()
     {
         $url = $this->provider->getBaseAccessTokenUrl([]);
-        
+
         $uri = parse_url($url);
         parse_str($uri['path'], $query);
 
@@ -63,28 +64,31 @@ class YahooTest extends \PHPUnit_Framework_TestCase
     {
         $token = m::mock('League\OAuth2\Client\Token\AccessToken');
 
-		$token->shouldReceive('getResourceOwnerId')->once()->andReturn('mocguid');
+        $token->shouldReceive('getResourceOwnerId')->once()->andReturn('mocguid');
 
         $url = $this->provider->getResourceOwnerDetailsUrl($token);
         $uri = parse_url($url);
         $this->assertEquals('/v1/user/mocguid/profile', $uri['path']);
 
     }
+
     public function testUserData()
     {
-        $response = json_decode('{"profile":{"guid":"mocguid","emails":[{"handle":"mock_email","id":2,"primary":false,"type":"HOME"}],"familyName":"mock_family_name","givenName":"mock_given_name","uri":"mock_url"}}', true);
-		$imageData = json_decode('{"image": {"uri": "mock_uril","height": 192,"imageUrl": "mock_image_url", "size": "192x192", "width": 192 } }',true);
+        $response = json_decode('{"profile":{"guid":"mocguid","emails":[{"handle":"mock_email","id":2,"primary":false,"type":"HOME"}],"familyName":"mock_family_name","givenName":"mock_given_name","uri":"mock_url"}}',
+            true);
+        $imageData = json_decode('{"image": {"uri": "mock_uril","height": 192,"imageUrl": "mock_image_url", "size": "192x192", "width": 192 } }',
+            true);
 
         $provider = m::mock('Hayageek\OAuth2\Client\Provider\Yahoo[fetchResourceOwnerDetails,getResponse]')->shouldAllowMockingProtectedMethods();;
         $provider->shouldReceive('fetchResourceOwnerDetails')->once()->andReturn($response);
         $provider->shouldReceive('getResponse')->once()->andReturn($imageData);
-        
-        
+
+
         $token = m::mock('League\OAuth2\Client\Token\AccessToken');
-		$token->shouldReceive('getResourceOwnerId')->once()->andReturn('mocguid');
-        
+        $token->shouldReceive('getResourceOwnerId')->once()->andReturn('mocguid');
+
         $user = $provider->getResourceOwner($token);
-        
+
 
         $this->assertInstanceOf('League\OAuth2\Client\Provider\ResourceOwnerInterface', $user);
 
@@ -94,16 +98,16 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('mock_email', $user->getEmail());
         $this->assertEquals('mock_image_url', $user->getAvatar());
         $this->assertEquals('mock_given_name mock_family_name', $user->getName());
-        
+
 
         $user = $user->toArray();
 
         $this->assertArrayHasKey('guid', $user['profile']);
         $this->assertArrayHasKey('handle', $user['profile']['emails'][0]);
-        $this->assertArrayHasKey('familyName',$user['profile']);
+        $this->assertArrayHasKey('familyName', $user['profile']);
         $this->assertArrayHasKey('givenName', $user['profile']);
         $this->assertArrayHasKey('imageUrl', $user);
-        
+
     }
 
     /**
@@ -120,16 +124,16 @@ class YahooTest extends \PHPUnit_Framework_TestCase
         $response->shouldReceive('getBody')
             ->andReturn(' { "error" : {"uri" : "moc_uri","lang" : "en-US","description" : "mock_description"}}');
 
-        $provider = m::mock('Hayageek\OAuth2\Client\Provider\Yahoo[sendRequest]')
+        $provider = m::mock('Hayageek\OAuth2\Client\Provider\Yahoo[getResponse]')
             ->shouldAllowMockingProtectedMethods();
 
-        $provider->shouldReceive('sendRequest')
+        $provider->shouldReceive('getResponse')
             ->times(1)
             ->andReturn($response);
 
         $token = m::mock('League\OAuth2\Client\Token\AccessToken');
-		$token->shouldReceive('getResourceOwnerId')->once()->andReturn('mocguid');
-        
+        $token->shouldReceive('getResourceOwnerId')->once()->andReturn('mocguid');
+
         $user = $provider->getResourceOwner($token);
     }
 }

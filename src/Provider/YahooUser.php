@@ -1,4 +1,5 @@
 <?php
+
 namespace Hayageek\OAuth2\Client\Provider;
 
 use League\OAuth2\Client\Provider\ResourceOwnerInterface;
@@ -9,7 +10,7 @@ class YahooUser implements ResourceOwnerInterface
      * @var array
      */
     protected $response;
-    
+
 
     /**
      * @var image URL
@@ -40,7 +41,7 @@ class YahooUser implements ResourceOwnerInterface
         nickname is not coming in the response.
         $this->response['profile']['nickname']
         */
-        return $this->getFirstName()." ".$this->getLastName();
+        return $this->getFirstName() . " " . $this->getLastName();
     }
 
     /**
