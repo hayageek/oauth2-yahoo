@@ -33,7 +33,6 @@ class Yahoo extends AbstractProvider
 
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-
         $guid = $token->getResourceOwnerId();
 
         return 'https://social.yahooapis.com/v1/user/' . $guid . '/profile?format=json';
@@ -84,7 +83,6 @@ class Yahoo extends AbstractProvider
 
     protected function checkResponse(ResponseInterface $response, $data)
     {
-
         if (!empty($data['error'])) {
             $code = 0;
             $error = $data['error'];
@@ -107,7 +105,6 @@ class Yahoo extends AbstractProvider
         $imageUrl = $this->getUserImageUrl($response, $token);
 
         return $user->setImageURL($imageUrl);
-
     }
 
     /**
