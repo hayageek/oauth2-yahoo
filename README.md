@@ -13,7 +13,6 @@ a patch via pull request.
 
 The following versions of PHP are supported.
 
-* PHP 5.5
 * PHP 5.6
 * PHP 7.0
 * PHP 7.1
