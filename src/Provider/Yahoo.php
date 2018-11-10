@@ -102,26 +102,6 @@ class Yahoo extends AbstractProvider
     {
         $user = new YahooUser($response);
 
-        $imageUrl = $this->getUserImageUrl($response, $token);
-
-        return $user->setImageURL($imageUrl);
-    }
-
-    /**
-     * Get user image url from provider, if available
-     *
-     * @param  array $response
-     * @param  AccessToken $token
-     *
-     * @return string
-     */
-    protected function getUserImageUrl(array $response, AccessToken $token)
-    {
-        $image = $this->getUserImage($response, $token);
-
-        if (isset($image['image']['imageUrl'])) {
-            return $image['image']['imageUrl'];
-        }
-        return null;
+        return $user;
     }
 }
