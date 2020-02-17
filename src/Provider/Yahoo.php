@@ -19,8 +19,6 @@ class Yahoo extends AbstractProvider
     */
     protected $language = "en-us";
 
-    private $imageSize = '192x192';
-
     public function getBaseAuthorizationUrl()
     {
         return 'https://api.login.yahoo.com/oauth2/request_auth';
@@ -33,30 +31,7 @@ class Yahoo extends AbstractProvider
 
     public function getResourceOwnerDetailsUrl(AccessToken $token)
     {
-        $guid = $token->getResourceOwnerId();
-
-        return 'https://social.yahooapis.com/v1/user/' . $guid . '/profile?format=json';
-    }
-
-    /**
-     * Get user image from provider
-     *
-     * @param  array $response
-     * @param  AccessToken $token
-     *
-     * @return array
-     */
-    protected function getUserImage(array $response, AccessToken $token)
-    {
-        $guid = $token->getResourceOwnerId();
-
-        $url = 'https://social.yahooapis.com/v1/user/' . $guid . '/profile/image/' . $this->imageSize . '?format=json';
-
-        $request = $this->getAuthenticatedRequest('get', $url, $token);
-
-        $response = $this->getResponse($request);
-
-        return $response;
+        return 'https://api.login.yahoo.com/openid/v1/userinfo';
     }
 
     protected function getAuthorizationParameters(array $options)
@@ -102,26 +77,6 @@ class Yahoo extends AbstractProvider
     {
         $user = new YahooUser($response);
 
-        $imageUrl = $this->getUserImageUrl($response, $token);
-
-        return $user->setImageURL($imageUrl);
-    }
-
-    /**
-     * Get user image url from provider, if available
-     *
-     * @param  array $response
-     * @param  AccessToken $token
-     *
-     * @return string
-     */
-    protected function getUserImageUrl(array $response, AccessToken $token)
-    {
-        $image = $this->getUserImage($response, $token);
-
-        if (isset($image['image']['imageUrl'])) {
-            return $image['image']['imageUrl'];
-        }
-        return null;
+        return $user;
     }
 }
