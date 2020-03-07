@@ -27,41 +27,47 @@ class YahooUser implements ResourceOwnerInterface
 
     public function getId()
     {
-        return $this->response['profile']['guid'];
+        return $this->response['sub'];
     }
 
     /**
-     * Get perferred display name.
+     * Get preferred display name.
      *
      * @return string
      */
     public function getName()
     {
-        /*
-        nickname is not coming in the response.
-        $this->response['profile']['nickname']
-        */
-        return $this->getFirstName() . " " . $this->getLastName();
+        return $this->response['name'];
     }
 
     /**
-     * Get perferred first name.
+     * Get preferred first name.
      *
-     * @return string
+     * @return string|null
      */
     public function getFirstName()
     {
-        return $this->response['profile']['givenName'];
+        return $this->getResponseValue('given_name');
     }
 
     /**
-     * Get perferred last name.
+     * Get preferred last name.
      *
-     * @return string
+     * @return string|null
      */
     public function getLastName()
     {
-        return $this->response['profile']['familyName'];
+        return $this->getResponseValue('family_name');
+    }
+
+    /**
+     * Get locale.
+     *
+     * @return string|null
+     */
+    public function getLocale()
+    {
+        return $this->getResponseValue('locale');
     }
 
     /**
@@ -83,13 +89,47 @@ class YahooUser implements ResourceOwnerInterface
      */
     public function getAvatar()
     {
-        return $this->response['imageUrl'];
+        return $this->getResponseValue('picture');
     }
 
-    public function setImageURL($url)
+    /**
+     * Get nickname.
+     *
+     * @return string|null
+     */
+    public function getNickname()
     {
-        $this->response['imageUrl'] = $url;
-        return $this;
+        return $this->getResponseValue('nickname');
+    }
+
+    /**
+     * Get preferred username.
+     *
+     * @return string|null
+     */
+    public function getPreferredUsername()
+    {
+        return $this->getResponseValue('preferred_username');
+    }
+
+    /**
+     * Get birth date.
+     *
+     * @return string|null
+     */
+    public function getBirthYear()
+    {
+        return $this->getResponseValue('birthdate');
+    }
+
+    /**
+     * Get phone number.
+     *
+     * @return string|null
+     */
+    public function getPhone()
+    {
+        return $this->getResponseValue('phone_number');
     }
 
     /**
@@ -100,5 +140,13 @@ class YahooUser implements ResourceOwnerInterface
     public function toArray()
     {
         return $this->response;
+    }
+
+    private function getResponseValue($key)
+    {
+        if (array_key_exists($key, $this->response)) {
+            return $this->response[$key];
+        }
+        return null;
     }
 }
